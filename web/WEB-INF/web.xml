@@ -132,6 +132,10 @@
         <servlet-name>UpdateComboServlet</servlet-name>
         <servlet-class>controller.UpdateComboServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchByTimeServlet</servlet-name>
+        <servlet-class>controller.SearchByTimeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShoppingServlet</servlet-name>
         <url-pattern>/shopping</url-pattern>
@@ -344,6 +348,10 @@
         <servlet-name>UpdateComboServlet</servlet-name>
         <url-pattern>/update-combo</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByTimeServlet</servlet-name>
+        <url-pattern>/search-by-time</url-pattern>
+    </servlet-mapping>
     <!--    VNPAY-->
     <servlet>
         <servlet-name>ajaxServlet</servlet-name>
@@ -369,9 +377,9 @@
         <servlet-name>vnpayRefund</servlet-name>
         <url-pattern>/vnpayrefund/*</url-pattern>
     </servlet-mapping>
-<session-config>
-    <session-timeout>
-        30
-    </session-timeout>
-</session-config>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
 </web-app>

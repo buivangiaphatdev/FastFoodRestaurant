@@ -23,6 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,10 +42,12 @@ public class ajaxServlet extends HttpServlet {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "ordertype";
-        float total = Float.parseFloat(req.getParameter("total")); 
+//        float total = Float.parseFloat(req.getParameter("total"));
+        HttpSession session = req.getSession();
+        float total = (float) session.getAttribute("subtotal");
         long amount = (long) (total *23000 * 100);
         String bankCode = req.getParameter("bankCode"); // Cách giao dịch
-        
+
         String vnp_TxnRef = Config.getRandomNumber(8);
         String vnp_IpAddr = Config.getIpAddress(req);
         String vnp_TmnCode = Config.vnp_TmnCode;

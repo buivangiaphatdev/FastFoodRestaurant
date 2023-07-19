@@ -39,7 +39,9 @@
         <!-- responsive -->
         <link rel="stylesheet" href="assets/css/responsive.css">
         <style>
-
+            .single-testimonial-slider1{
+                color: white;
+            }
         </style>
 
     </head>
@@ -190,7 +192,7 @@
                     <div class="mb-3"><span>Sale code: <span class="text-danger font-weight-bold">${sale.saleCode}</span></span></div>
                     <div class="mb-3"><p class="text-secondary" style="font-style: italic; font-size: 80%">(*) This sale event only applies for: ${wItems}</p></div>
                     <!--Countdown Timer-->
-                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="${sale.endDate}"><div  class="counter-column"><div class="inner"><span  class="count">00</span> Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
+                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="${sale.endDate}"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
 
                     <a href="shopping" class="cart-btn btn-lg">Shop Now</a>
                 </div>
@@ -211,12 +213,12 @@
                                             <div class="mb-3"><span>Sale code: <span class="text-danger font-weight-bold">${sale.saleCode}</span></span></div>
                                             <div class="mb-3"><p class="text-secondary" style="font-style: italic; font-size: 80%">(*) This sale event only applies for: ${wItems}</p></div>
                                             <!--Countdown Timer-->
-                                            <div  class="time-counter"><div class="time-countdown clearfix" data-countdown="${sale.endDate}"><div class="counter-column"><div class="inner"><span class="count">00</span> Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
+                                            <div class="time-counter"><div class="time-countdown clearfix" data-countdown="${sale.endDate}"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
                                             <a href="shopping" class="cart-btn btn-lg">Shop Now</a>
                                         </div>
                                     </section>
                                 </div>
-                                <div class="single-testimonial-slider">
+                                <div class="single-testimonial-slider1">
                                     <section class="w-100" style="background-image: url('https://pbsapos.com.au/wp-content/uploads/2019/12/fastfood.jpg'); 
                                              position: relative;
                                              background-color: #f5f5f5;
@@ -288,7 +290,12 @@
                                 </div>
                                 <h3>${c.name}</h3>
                                 <p class="product-price"> ${c.price}$ </p>
-                                <a href="add-to-cart?productID=${c.productID}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                <c:if test="${c.status == false}">
+                                    <a href="sorry.jsp" class="btn btn-danger px-5 py-3">Sold out</a>
+                                </c:if>
+                                <c:if test="${c.status == true}">
+                                    <a href="add-to-cart?productID=${c.productID}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                </c:if>
                                 <c:if test="${sessionScope.acc.role != null}">
                                     <a href="add-to-wishlist?productID=${c.productID}"><button class="btn btn-danger px-5 py-3"><i class="fas fa-heart"></i></button></a>
                                         </c:if>                       

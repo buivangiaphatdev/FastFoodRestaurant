@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
 <%@page import="VNPAY.Config"%>
@@ -62,7 +63,7 @@
                 </div>    
                 <div class="form-group">
                     <label >Amount:</label>
-                    <label><%=request.getParameter("vnp_Amount")%></label>
+                    <label><%=Long.parseLong(request.getParameter("vnp_Amount")) / 100%></label>
                 </div>  
                 <div class="form-group">
                     <label >Order info:</label>
@@ -88,9 +89,11 @@
                     <label >Payment Status:</label>
                     <label>
                         <%
+                            int ok = 0;
                             if (signValue.equals(vnp_SecureHash)) {
                                 if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
                                     out.print("Success");
+                                    ok = 1;
                                 } else {
                                     out.print("Failed");
                                 }
@@ -100,6 +103,22 @@
                             }
                         %></label>
                 </div> 
+                <form action="checkout" method="post">
+
+                    <p><input type="hidden" placeholder="Name" value="${sessionScope.vnpay_name}" name="name"></p>
+                    <p><input type="hidden" placeholder="Email"value="${sessionScope.vnpay_email}" name="email"></p>
+                    <p><input type="hidden" placeholder="Address" value="${sessionScope.vnpay_address}" name="address"></p>
+                    <p><input type="hidden" placeholder="Phone" value="${sessionScope.vnpay_phone}" name="phone"></p>
+                    <p><input type="hidden" value="${sessionScope.vnpay_code}" name="code"></p>
+                    <p><input type="hidden" value="${sessionScope.vnpay_my_point}" name="my_point"></p>
+                    <p><input type="hidden" value="${sessionScope.vnpay_note}" name="note" id="bill" ></p>
+                    <p><input type="hidden" value="<%= (ok == 1) ? 1 : 0 %>" name="changeStatus"></p>
+                    
+                    <button type="submit" class="boxed-btn place-btn px-4 py-2">Confirm</button>
+
+
+                </form>
+
             </div>
             <p>
                 &nbsp;
